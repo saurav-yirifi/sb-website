@@ -23,21 +23,26 @@ function formatDate(date: Date): string {
        HERO
        ═══════════════════════════════════════════════════════════ -->
   <section class="hero" id="hero">
-    <div class="hero-glow" id="hero-glow"></div>
-    <div class="hero-grid-overlay"></div>
-    <div class="hero-scanline"></div>
+    <!-- Layer 1: Geometric grid canvas (deepest) -->
+    <canvas class="hero-grid-canvas" id="hero-grid-canvas"></canvas>
+    <!-- Layer 2: Gradient mesh orbs -->
+    <div class="hero-mesh" id="hero-mesh">
+      <div class="mesh-orb mesh-orb-1"></div>
+      <div class="mesh-orb mesh-orb-2"></div>
+      <div class="mesh-orb mesh-orb-3"></div>
+    </div>
+    <!-- Layer 3: Content -->
     <div class="hero-inner container">
       <div class="hero-content">
-        <span class="hero-eyebrow">Builder // Founder // CEO</span>
-        <h1 class="hero-title">
-          I <span class="cyan">build</span> things at the<br />
-          intersection of <span class="hero-title-em">AI</span> and <span class="hero-title-em">finance</span>.
+        <span class="hero-eyebrow" id="hero-eyebrow">Builder // Founder // CEO</span>
+        <h1 class="hero-title" id="hero-title">
+          <span class="terminal-cursor" id="terminal-cursor"></span>
         </h1>
-        <p class="hero-desc">
-          Founder & CEO of Yirifi.ai — building AI-powered regulatory intelligence for crypto and fintech.
-          Previously founded two digital banks across Asia.
+        <p class="hero-desc" id="hero-desc">
+          Founder & CEO of Yirifi.ai — a 20-person AI regulatory intelligence startup.
+          Former founding executive of TRUST Bank Singapore (1M+ clients) and Mox Bank Hong Kong (750K clients).
         </p>
-        <div class="hero-actions">
+        <div class="hero-actions" id="hero-actions">
           <a href="/blog/" class="btn btn-primary">
             <span>Read the Blog</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -50,40 +55,8 @@ function formatDate(date: Date): string {
         <span>103.8519&deg; E</span>
       </div>
     </div>
-    <div class="hero-scroll-hint">
+    <div class="hero-scroll-hint" id="hero-scroll-hint">
       <div class="scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════════
-       LATEST WRITING
-       ═══════════════════════════════════════════════════════════ -->
-  <section class="writing" id="writing">
-    <div class="container">
-      <div class="section-label">01 // Latest Writing</div>
-      <div class="posts-grid">
-        {posts.map((post) => (
-          <a href={`/blog/${post.id}/`} class="post-card">
-            <div class="post-card-inner">
-              <span class="post-category">{post.data.category}</span>
-              <h3 class="post-title">{post.data.title}</h3>
-              <p class="post-excerpt">{post.data.description}</p>
-              <div class="post-meta">
-                <span>{formatDate(post.data.date)}</span>
-                <span class="meta-dot"></span>
-                <span>{estimateReadTime(post.body ?? '')} min read</span>
-              </div>
-            </div>
-            <div class="post-card-edge"></div>
-          </a>
-        ))}
-      </div>
-      <div class="writing-footer">
-        <a href="/blog/" class="link-arrow">
-          View all posts
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-      </div>
     </div>
   </section>
 
@@ -92,19 +65,19 @@ function formatDate(date: Date): string {
        ═══════════════════════════════════════════════════════════ -->
   <section class="about-teaser" id="about">
     <div class="container">
-      <div class="section-label">02 // About</div>
+      <div class="section-label">01 // About</div>
       <div class="about-grid">
         <div class="about-narrative">
           <p>
-            I've spent 25+ years at the intersection of banking, technology, and venture building.
-            As the founding executive behind <strong>TRUST Bank</strong> (Singapore's first digital bank — 450K clients
-            in four months) and <strong>Mox Bank</strong> (Hong Kong — most downloaded app, $1.2B deposits),
-            I know what it takes to build financial products from zero to scale.
+            Founder & CEO of <strong>Yirifi.ai</strong>, a 20-person AI regulatory intelligence startup
+            where just two people built 15 backoffice microsites in three months. Author of
+            <em>Blueprint for an AI-First Company</em>.
           </p>
           <p>
-            Now I'm building <strong>Yirifi.ai</strong>, an AI-powered regulatory intelligence platform
-            helping financial institutions navigate the rapidly shifting crypto and fintech landscape.
-            My team of two shipped 15 AI microsites in three months.
+            Former founding executive of two digital banks — <strong>TRUST Bank</strong> Singapore
+            (1M+ clients, ~20% market share) and <strong>Mox Bank</strong> Hong Kong
+            (750K clients, 12% market share). 20+ years in banking and fintech across
+            Standard Chartered and Citibank.
           </p>
           <a href="/about/" class="link-arrow">
             Read full bio
@@ -144,7 +117,7 @@ function formatDate(date: Date): string {
        ═══════════════════════════════════════════════════════════ -->
   <section class="book" id="book">
     <div class="container">
-      <div class="section-label">03 // The Book</div>
+      <div class="section-label">02 // The Book</div>
       <div class="book-card">
         <div class="book-card-content">
           <h2 class="book-title">Blueprint for an AI&#8209;First Company</h2>
@@ -180,6 +153,38 @@ function formatDate(date: Date): string {
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
+       LATEST WRITING
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="writing" id="writing">
+    <div class="container">
+      <div class="section-label">03 // Latest Writing</div>
+      <div class="posts-grid">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}/`} class="post-card">
+            <div class="post-card-inner">
+              <span class="post-category">{post.data.category}</span>
+              <h3 class="post-title">{post.data.title}</h3>
+              <p class="post-excerpt">{post.data.description}</p>
+              <div class="post-meta">
+                <span>{formatDate(post.data.date)}</span>
+                <span class="meta-dot"></span>
+                <span>{estimateReadTime(post.body ?? '')} min read</span>
+              </div>
+            </div>
+            <div class="post-card-edge"></div>
+          </a>
+        ))}
+      </div>
+      <div class="writing-footer">
+        <a href="/blog/" class="link-arrow">
+          View all posts
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
        CONTACT CTA
        ═══════════════════════════════════════════════════════════ -->
   <section class="contact-cta" id="connect">
@@ -208,53 +213,91 @@ function formatDate(date: Date): string {
     align-items: center;
     overflow: hidden;
     padding: 0;
+    background: var(--bg-void);
   }
 
-  .hero-glow {
+  /* --- Layer 1: Geometric grid canvas --- */
+  .hero-grid-canvas {
     position: absolute;
     inset: 0;
-    pointer-events: none;
+    width: 100%;
+    height: 100%;
     z-index: 1;
-    transition: background 0.08s linear;
   }
 
-  .hero-grid-overlay {
+  /* --- Layer 2: Gradient mesh orbs --- */
+  .hero-mesh {
     position: absolute;
     inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.025;
-    background-image:
-      linear-gradient(var(--accent-muted) 1px, transparent 1px),
-      linear-gradient(90deg, var(--accent-muted) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 70%);
-  }
-
-  .hero-scanline {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
-    opacity: 0;
     z-index: 2;
-    animation: scanline 4s var(--ease-out-expo) infinite;
-    animation-delay: 2s;
+    overflow: hidden;
+    pointer-events: none;
   }
 
-  @keyframes scanline {
-    0% { top: 0; opacity: 0; }
-    5% { opacity: 0.4; }
-    95% { opacity: 0.1; }
-    100% { top: 100%; opacity: 0; }
+  .mesh-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    will-change: transform;
   }
 
+  .mesh-orb-1 {
+    width: 700px;
+    height: 700px;
+    background: var(--accent);
+    opacity: 0.12;
+    top: -15%;
+    left: -10%;
+    animation: mesh-drift-1 10s ease-in-out infinite;
+  }
+
+  .mesh-orb-2 {
+    width: 500px;
+    height: 500px;
+    background: var(--accent-2, #8B5CF6);
+    opacity: 0.1;
+    bottom: -20%;
+    right: -8%;
+    animation: mesh-drift-2 13s ease-in-out infinite;
+  }
+
+  .mesh-orb-3 {
+    width: 400px;
+    height: 400px;
+    background: var(--accent);
+    opacity: 0.06;
+    top: 40%;
+    left: 45%;
+    animation: mesh-drift-3 16s ease-in-out infinite;
+  }
+
+  @keyframes mesh-drift-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    20% { transform: translate(18%, 12%) scale(1.15); }
+    40% { transform: translate(8%, 25%) scale(0.9); }
+    60% { transform: translate(-12%, 18%) scale(1.1); }
+    80% { transform: translate(-5%, 5%) scale(1.05); }
+  }
+
+  @keyframes mesh-drift-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    20% { transform: translate(-15%, -10%) scale(1.1); }
+    40% { transform: translate(-25%, -20%) scale(0.85); }
+    60% { transform: translate(-8%, -28%) scale(1.15); }
+    80% { transform: translate(-18%, -8%) scale(0.95); }
+  }
+
+  @keyframes mesh-drift-3 {
+    0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    25% { transform: translate(12%, -15%) scale(1.4) rotate(45deg); }
+    50% { transform: translate(-8%, 10%) scale(0.7) rotate(90deg); }
+    75% { transform: translate(15%, 5%) scale(1.2) rotate(135deg); }
+  }
+
+  /* --- Layer 3: Content --- */
   .hero-inner {
     position: relative;
-    z-index: 3;
+    z-index: 5;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -268,6 +311,7 @@ function formatDate(date: Date): string {
     max-width: 52rem;
   }
 
+  /* --- Eyebrow --- */
   .hero-eyebrow {
     display: inline-block;
     font-family: var(--font-mono);
@@ -278,10 +322,14 @@ function formatDate(date: Date): string {
     color: var(--accent);
     margin-bottom: var(--sp-4);
     opacity: 0;
-    transform: translateY(20px);
-    animation: hero-reveal 0.8s var(--ease-out-expo) 0.2s forwards;
+    transition: opacity 0.6s var(--ease-out-expo);
   }
 
+  .hero-eyebrow.visible {
+    opacity: 1;
+  }
+
+  /* --- Title with typing effect --- */
   .hero-title {
     font-size: clamp(2.25rem, 5.5vw + 0.5rem, 4.75rem);
     font-weight: 500;
@@ -289,17 +337,15 @@ function formatDate(date: Date): string {
     letter-spacing: -0.035em;
     color: var(--text-1);
     margin-bottom: var(--sp-4);
-    opacity: 0;
-    transform: translateY(24px);
-    animation: hero-reveal 0.9s var(--ease-out-expo) 0.35s forwards;
+    min-height: 3.5em;
   }
 
-  .hero-title .cyan {
+  .hero-title .accent-word {
     color: var(--accent);
     position: relative;
   }
 
-  .hero-title .cyan::after {
+  .hero-title .accent-word::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -311,11 +357,32 @@ function formatDate(date: Date): string {
     border-radius: 1px;
   }
 
-  .hero-title-em {
+  .hero-title .em-word {
     font-style: italic;
     font-weight: 400;
   }
 
+  .terminal-cursor {
+    display: inline;
+    animation: blink-cursor 0.8s step-end infinite;
+    color: var(--accent);
+  }
+
+  .terminal-cursor::after {
+    content: '█';
+    font-size: 0.85em;
+  }
+
+  .terminal-cursor.hidden {
+    display: none;
+  }
+
+  @keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* --- Description & actions (fade in after typing) --- */
   .hero-desc {
     font-size: 1.0625rem;
     line-height: 1.7;
@@ -323,8 +390,13 @@ function formatDate(date: Date): string {
     max-width: 40rem;
     margin-bottom: var(--sp-6);
     opacity: 0;
-    transform: translateY(20px);
-    animation: hero-reveal 0.8s var(--ease-out-expo) 0.55s forwards;
+    transform: translateY(16px);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+  }
+
+  .hero-desc.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .hero-actions {
@@ -333,10 +405,16 @@ function formatDate(date: Date): string {
     gap: var(--sp-2);
     flex-wrap: wrap;
     opacity: 0;
-    transform: translateY(16px);
-    animation: hero-reveal 0.7s var(--ease-out-expo) 0.72s forwards;
+    transform: translateY(12px);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
   }
 
+  .hero-actions.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* --- Coordinates --- */
   .hero-coordinates {
     position: absolute;
     bottom: var(--sp-6);
@@ -350,7 +428,11 @@ function formatDate(date: Date): string {
     align-items: flex-end;
     gap: 2px;
     opacity: 0;
-    animation: hero-reveal 0.6s var(--ease-out-expo) 1.2s forwards;
+    transition: opacity 0.6s var(--ease-out-expo);
+  }
+
+  .hero-coordinates.visible {
+    opacity: 1;
   }
 
   @media (min-width: 1024px) {
@@ -359,14 +441,19 @@ function formatDate(date: Date): string {
     }
   }
 
+  /* --- Scroll hint --- */
   .hero-scroll-hint {
     position: absolute;
     bottom: var(--sp-6);
     left: 50%;
     transform: translateX(-50%);
-    z-index: 3;
+    z-index: 5;
     opacity: 0;
-    animation: hero-reveal 0.5s var(--ease-out-expo) 1.4s forwards;
+    transition: opacity 0.5s var(--ease-out-expo);
+  }
+
+  .hero-scroll-hint.visible {
+    opacity: 1;
   }
 
   .scroll-line {
@@ -393,13 +480,6 @@ function formatDate(date: Date): string {
     0% { top: -8px; opacity: 0; }
     20% { opacity: 1; }
     100% { top: 48px; opacity: 0; }
-  }
-
-  @keyframes hero-reveal {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   /* ================================================================
@@ -840,50 +920,315 @@ function formatDate(date: Date): string {
 </style>
 
 <script>
-  // Cursor glow — tracks mouse on the hero section
-  const hero = document.getElementById('hero');
-  const glow = document.getElementById('hero-glow');
+  // ================================================================
+  // TYPING EFFECT — types out the hero title, then reveals elements
+  // ================================================================
+  function initTypingHero() {
+    const titleEl = document.getElementById('hero-title');
+    const cursorEl = document.getElementById('terminal-cursor');
+    const eyebrowEl = document.getElementById('hero-eyebrow');
+    const descEl = document.getElementById('hero-desc');
+    const actionsEl = document.getElementById('hero-actions');
+    const coordsEl = document.querySelector('.hero-coordinates') as HTMLElement;
+    const scrollHintEl = document.getElementById('hero-scroll-hint');
 
-  if (hero && glow && window.matchMedia('(pointer: fine)').matches) {
-    hero.addEventListener('mousemove', (e) => {
-      const rect = hero.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      glow.style.background = `radial-gradient(600px circle at ${x}px ${y}px, var(--accent-glow), transparent 60%)`;
+    if (!titleEl || !cursorEl) return;
+
+    // The text segments to type — with markup hints
+    const segments: { text: string; class?: string }[] = [
+      { text: 'I ' },
+      { text: 'build', class: 'accent-word' },
+      { text: ' things at the\n' },
+      { text: 'intersection of ' },
+      { text: 'AI', class: 'em-word' },
+      { text: ', ' },
+      { text: 'Crypto', class: 'em-word' },
+      { text: '\nand ' },
+      { text: 'Finance', class: 'em-word' },
+      { text: '.' },
+    ];
+
+    let segIndex = 0;
+    let charIndex = 0;
+    let currentSpan: HTMLSpanElement | null = null;
+
+    function typeNext() {
+      if (segIndex >= segments.length) {
+        // Typing complete — reveal rest of hero
+        setTimeout(() => {
+          descEl?.classList.add('visible');
+          setTimeout(() => {
+            actionsEl?.classList.add('visible');
+            setTimeout(() => {
+              coordsEl?.classList.add('visible');
+              scrollHintEl?.classList.add('visible');
+            }, 300);
+          }, 250);
+        }, 400);
+
+        // Hide cursor after a short pause
+        setTimeout(() => {
+          cursorEl?.classList.add('hidden');
+        }, 2000);
+        return;
+      }
+
+      const seg = segments[segIndex];
+
+      // Create or reuse span for styled segments
+      if (charIndex === 0 && seg.class) {
+        currentSpan = document.createElement('span');
+        currentSpan.className = seg.class;
+        titleEl!.insertBefore(currentSpan, cursorEl);
+      } else if (charIndex === 0 && !seg.class) {
+        currentSpan = null;
+      }
+
+      const char = seg.text[charIndex];
+
+      if (char === '\n') {
+        const br = document.createElement('br');
+        if (currentSpan) {
+          currentSpan.appendChild(br);
+        } else {
+          titleEl!.insertBefore(br, cursorEl);
+        }
+      } else {
+        const textNode = document.createTextNode(char);
+        if (currentSpan) {
+          currentSpan.appendChild(textNode);
+        } else {
+          titleEl!.insertBefore(textNode, cursorEl);
+        }
+      }
+
+      charIndex++;
+
+      if (charIndex >= seg.text.length) {
+        segIndex++;
+        charIndex = 0;
+        currentSpan = null;
+      }
+
+      // Variable typing speed
+      const delay = char === '\n' ? 150 : char === ' ' ? 40 : 30 + Math.random() * 35;
+      setTimeout(typeNext, delay);
+    }
+
+    // Kick off sequence
+    setTimeout(() => {
+      eyebrowEl?.classList.add('visible');
+      setTimeout(typeNext, 500);
+    }, 300);
+  }
+
+  // ================================================================
+  // GEOMETRIC GRID CANVAS — animated cell grid behind everything
+  // ================================================================
+  function initHeroGrid() {
+    const canvas = document.getElementById('hero-grid-canvas') as HTMLCanvasElement;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = 0;
+    let height = 0;
+    let mouseX = -1000;
+    let mouseY = -1000;
+    const cellSize = 52;
+    let cols = 0;
+    let rows = 0;
+    let cells: { brightness: number; target: number }[] = [];
+    let time = 0;
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * devicePixelRatio;
+      canvas.height = height * devicePixelRatio;
+      ctx!.scale(devicePixelRatio, devicePixelRatio);
+      cols = Math.ceil(width / cellSize) + 1;
+      rows = Math.ceil(height / cellSize) + 1;
+      cells = new Array(cols * rows).fill(null).map(() => ({ brightness: 0, target: 0 }));
+    }
+
+    // Parse the computed accent color
+    function getAccentRgb(): [number, number, number] {
+      const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+      const r = parseInt(accent.slice(1, 3), 16);
+      const g = parseInt(accent.slice(3, 5), 16);
+      const b = parseInt(accent.slice(5, 7), 16);
+      return [r, g, b];
+    }
+
+    let accentRgb = getAccentRgb();
+
+    function draw() {
+      ctx!.clearRect(0, 0, width, height);
+      const [r, g, b] = accentRgb;
+      time += 0.012;
+
+      const centerX = width / 2;
+      const centerY = height / 2;
+
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const idx = row * cols + col;
+          const x = col * cellSize;
+          const y = row * cellSize;
+
+          // Wave from center
+          const distFromCenter = Math.sqrt(
+            Math.pow((x - centerX) / width, 2) + Math.pow((y - centerY) / height, 2)
+          );
+          const wave = Math.sin(distFromCenter * 12 - time * 2) * 0.5 + 0.5;
+
+          // Diagonal sweep
+          const diagWave = Math.sin((col + row) * 0.3 - time * 1.5) * 0.5 + 0.5;
+
+          // Mouse proximity
+          const dx = x + cellSize / 2 - mouseX;
+          const dy = y + cellSize / 2 - mouseY;
+          const mouseDist = Math.sqrt(dx * dx + dy * dy);
+          const mouseInfluence = Math.max(0, 1 - mouseDist / 200);
+
+          // Combine
+          cells[idx].target = Math.min(1, wave * 0.1 + diagWave * 0.05 + mouseInfluence * 0.45);
+
+          // Smooth interpolation
+          cells[idx].brightness += (cells[idx].target - cells[idx].brightness) * 0.06;
+
+          const alpha = cells[idx].brightness;
+          if (alpha > 0.01) {
+            // Cell border
+            ctx!.strokeStyle = `rgba(${r},${g},${b},${alpha * 0.25})`;
+            ctx!.lineWidth = 0.5;
+            ctx!.strokeRect(x + 0.5, y + 0.5, cellSize - 1, cellSize - 1);
+
+            // Cell fill
+            if (alpha > 0.04) {
+              ctx!.fillStyle = `rgba(${r},${g},${b},${alpha * 0.04})`;
+              ctx!.fillRect(x + 1, y + 1, cellSize - 2, cellSize - 2);
+            }
+
+            // Corner dots on bright cells
+            if (alpha > 0.12) {
+              ctx!.fillStyle = `rgba(${r},${g},${b},${alpha * 0.5})`;
+              const dotSize = 1.5;
+              ctx!.fillRect(x, y, dotSize, dotSize);
+              ctx!.fillRect(x + cellSize - dotSize, y, dotSize, dotSize);
+              ctx!.fillRect(x, y + cellSize - dotSize, dotSize, dotSize);
+              ctx!.fillRect(x + cellSize - dotSize, y + cellSize - dotSize, dotSize, dotSize);
+            }
+          }
+        }
+      }
+
+      // Pulse wave
+      const pulsePhase = (time * 0.4) % (Math.PI * 2);
+      const pulseRadius = (Math.sin(pulsePhase) * 0.5 + 0.5) * Math.max(width, height) * 0.7;
+      const pulseWidth = 100;
+
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const x = col * cellSize + cellSize / 2;
+          const y = row * cellSize + cellSize / 2;
+          const dist = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+          const pulseDist = Math.abs(dist - pulseRadius);
+          if (pulseDist < pulseWidth) {
+            const pulseAlpha = (1 - pulseDist / pulseWidth) * 0.06;
+            ctx!.fillStyle = `rgba(${r},${g},${b},${pulseAlpha})`;
+            ctx!.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
+          }
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    resize();
+    draw();
+
+    window.addEventListener('resize', () => {
+      resize();
+      accentRgb = getAccentRgb();
     });
 
-    hero.addEventListener('mouseleave', () => {
-      glow.style.background = 'none';
+    const hero = document.getElementById('hero');
+    hero?.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    });
+
+    hero?.addEventListener('mouseleave', () => {
+      mouseX = -1000;
+      mouseY = -1000;
     });
   }
 
-  // Scroll reveal — IntersectionObserver for sections
-  const revealTargets = document.querySelectorAll('.writing, .about-teaser, .book, .contact-cta');
-  const revealChildren = (section: Element) => {
-    const elements = section.querySelectorAll('.section-label, .post-card, .about-narrative, .about-card, .book-card, .cta-inner, .writing-footer');
-    elements.forEach((el, i) => {
-      (el as HTMLElement).style.opacity = '0';
-      (el as HTMLElement).style.transform = 'translateY(24px)';
-      (el as HTMLElement).style.transition = `opacity 0.6s ${0.08 * i}s var(--ease-out-expo), transform 0.6s ${0.08 * i}s var(--ease-out-expo)`;
-    });
-    return elements;
-  };
+  // ================================================================
+  // MESH ORBS — mouse parallax
+  // ================================================================
+  function initMeshParallax() {
+    const mesh = document.getElementById('hero-mesh');
+    if (!mesh) return;
+    const hero = document.getElementById('hero');
+    const orbs = mesh.querySelectorAll('.mesh-orb') as NodeListOf<HTMLElement>;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const children = entry.target.querySelectorAll('.section-label, .post-card, .about-narrative, .about-card, .book-card, .cta-inner, .writing-footer');
-        children.forEach(el => {
-          (el as HTMLElement).style.opacity = '1';
-          (el as HTMLElement).style.transform = 'translateY(0)';
-        });
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '-40px' });
+    hero?.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-  revealTargets.forEach(section => {
-    revealChildren(section);
-    observer.observe(section);
-  });
+      orbs.forEach((orb, i) => {
+        const factor = (i + 1) * 20;
+        orb.style.marginLeft = `${x * factor}px`;
+        orb.style.marginTop = `${y * factor}px`;
+      });
+    });
+  }
+
+  // ================================================================
+  // SCROLL REVEAL — IntersectionObserver for below-fold sections
+  // ================================================================
+  function initScrollReveal() {
+    const revealTargets = document.querySelectorAll('.writing, .about-teaser, .book, .contact-cta');
+
+    const revealChildren = (section: Element) => {
+      const elements = section.querySelectorAll('.section-label, .post-card, .about-narrative, .about-card, .book-card, .cta-inner, .writing-footer');
+      elements.forEach((el, i) => {
+        (el as HTMLElement).style.opacity = '0';
+        (el as HTMLElement).style.transform = 'translateY(24px)';
+        (el as HTMLElement).style.transition = `opacity 0.6s ${0.08 * i}s var(--ease-out-expo), transform 0.6s ${0.08 * i}s var(--ease-out-expo)`;
+      });
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const children = entry.target.querySelectorAll('.section-label, .post-card, .about-narrative, .about-card, .book-card, .cta-inner, .writing-footer');
+          children.forEach(el => {
+            (el as HTMLElement).style.opacity = '1';
+            (el as HTMLElement).style.transform = 'translateY(0)';
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '-40px' });
+
+    revealTargets.forEach(section => {
+      revealChildren(section);
+      observer.observe(section);
+    });
+  }
+
+  // ================================================================
+  // INIT ALL
+  // ================================================================
+  initHeroGrid();
+  initMeshParallax();
+  initTypingHero();
+  initScrollReveal();
 </script>

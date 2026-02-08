@@ -11,11 +11,11 @@
   --bg-elevated: #1A1A1F;
   --bg-subtle: #222228;
 
-  /* Primary Accent: Electric Cyan */
-  --accent: #00F0FF;
-  --accent-dim: #00F0FF99;
-  --accent-glow: #00F0FF15;
-  --accent-muted: #00F0FF33;
+  /* Primary Accent: Electric Lime */
+  --accent: #CCFF00;
+  --accent-dim: #CCFF0099;
+  --accent-glow: #CCFF0015;
+  --accent-muted: #CCFF0033;
 
   /* Secondary: Ultraviolet */
   --accent-2: #8B5CF6;
@@ -33,7 +33,7 @@
   /* Borders */
   --border-default: #F0F0F510;
   --border-hover: #F0F0F520;
-  --border-accent: #00F0FF33;
+  --border-accent: #CCFF0033;
 
   /* Typography */
   --font-heading: "Space Grotesk", system-ui, sans-serif;
