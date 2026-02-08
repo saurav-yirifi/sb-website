@@ -1,0 +1,210 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/about/', label: 'About' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/contact/', label: 'Contact' },
+];
+---
+
+<header class="site-header" id="site-header">
+  <div class="header-inner container">
+    <a href="/" class="header-brand">
+      <span class="brand-name">SB</span>
+    </a>
+    <nav class="header-nav" id="header-nav">
+      {navItems.map(item => (
+        <a
+          href={item.href}
+          class:list={['nav-link', { active: currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) }]}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a href="https://saurav-yirifi.github.io/blueprint-ai-first-company/" target="_blank" rel="noopener" class="nav-link nav-link-external">
+        Book <span class="external-arrow">&nearr;</span>
+      </a>
+    </nav>
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: var(--sp-3) 0;
+    transition: background var(--duration-normal) var(--ease-out-expo),
+                padding var(--duration-normal) var(--ease-out-expo),
+                border-color var(--duration-normal) var(--ease-out-expo);
+    border-bottom: 1px solid transparent;
+  }
+
+  .site-header.scrolled {
+    background: rgba(10, 10, 11, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: var(--sp-1) 0;
+    border-bottom-color: var(--border-default);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-brand {
+    text-decoration: none;
+  }
+
+  .header-brand:hover {
+    text-decoration: none;
+  }
+
+  .brand-name {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-1);
+    letter-spacing: -0.03em;
+  }
+
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    text-decoration: none;
+    padding: var(--sp-1) var(--sp-2);
+    border-radius: 4px;
+    transition: color var(--duration-fast) var(--ease-out-expo),
+                background var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .nav-link:hover {
+    color: var(--text-1);
+    background: var(--bg-elevated);
+    text-decoration: none;
+  }
+
+  .nav-link.active {
+    color: var(--accent);
+  }
+
+  .external-arrow {
+    font-size: 0.65rem;
+    opacity: 0.6;
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--sp-1);
+  }
+
+  .mobile-toggle span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--text-1);
+    transition: transform var(--duration-normal) var(--ease-out-expo),
+                opacity var(--duration-fast);
+  }
+
+  .mobile-toggle[aria-expanded="true"] span:first-child {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+
+  .mobile-toggle[aria-expanded="true"] span:last-child {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+
+  @media (max-width: 768px) {
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .header-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg-void);
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--sp-2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--duration-normal) var(--ease-out-expo);
+    }
+
+    .header-nav.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-link {
+      font-size: 1rem;
+      padding: var(--sp-2) var(--sp-4);
+    }
+  }
+</style>
+
+<script>
+  // Scroll behavior
+  const header = document.getElementById('site-header');
+  let lastScroll = 0;
+
+  function onScroll() {
+    const scrollY = window.scrollY;
+    if (scrollY > 80) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+    lastScroll = scrollY;
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile toggle
+  const toggle = document.getElementById('mobile-toggle');
+  const nav = document.getElementById('header-nav');
+
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    nav?.classList.toggle('open');
+  });
+
+  // Close mobile nav on link click
+  nav?.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      toggle?.setAttribute('aria-expanded', 'false');
+      nav?.classList.remove('open');
+    });
+  });
+</script>

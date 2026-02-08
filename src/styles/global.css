@@ -1,0 +1,236 @@
+/* ============================================================
+   DARK INSTRUMENT PANEL — Design System
+   sauravbhatia.com
+   ============================================================ */
+
+/* --- Design Tokens --- */
+:root {
+  /* Backgrounds */
+  --bg-void: #0A0A0B;
+  --bg-surface: #111113;
+  --bg-elevated: #1A1A1F;
+  --bg-subtle: #222228;
+
+  /* Primary Accent: Electric Cyan */
+  --accent: #00F0FF;
+  --accent-dim: #00F0FF99;
+  --accent-glow: #00F0FF15;
+  --accent-muted: #00F0FF33;
+
+  /* Secondary: Ultraviolet */
+  --accent-2: #8B5CF6;
+  --accent-2-dim: #8B5CF699;
+  --accent-2-glow: #8B5CF615;
+
+  /* Tertiary: Signal Red */
+  --accent-3: #FF3366;
+
+  /* Text */
+  --text-1: #F0F0F5;
+  --text-2: #F0F0F599;
+  --text-3: #F0F0F54D;
+
+  /* Borders */
+  --border-default: #F0F0F510;
+  --border-hover: #F0F0F520;
+  --border-accent: #00F0FF33;
+
+  /* Typography */
+  --font-heading: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* Spacing (8px base) */
+  --sp-1: 0.5rem;   /* 8px */
+  --sp-2: 1rem;     /* 16px */
+  --sp-3: 1.5rem;   /* 24px */
+  --sp-4: 2rem;     /* 32px */
+  --sp-5: 2.5rem;   /* 40px */
+  --sp-6: 3rem;     /* 48px */
+  --sp-8: 4rem;     /* 64px */
+  --sp-10: 5rem;    /* 80px */
+  --sp-12: 6rem;    /* 96px */
+  --sp-16: 8rem;    /* 128px */
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 0.15s;
+  --duration-normal: 0.25s;
+  --duration-slow: 0.4s;
+
+  /* Layout */
+  --max-width: 72rem;    /* 1152px */
+  --content-width: 48rem; /* 768px */
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-2);
+  background-color: var(--bg-void);
+  min-height: 100dvh;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  color: var(--text-1);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem); }
+h2 { font-size: clamp(1.75rem, 3vw + 0.5rem, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 2vw + 0.25rem, 1.75rem); }
+h4 { font-size: 1.25rem; }
+
+p {
+  max-width: 65ch;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out-expo);
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+strong { color: var(--text-1); }
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--bg-elevated);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+pre {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  padding: var(--sp-3);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+blockquote {
+  border-left: 2px solid var(--accent-muted);
+  padding-left: var(--sp-3);
+  color: var(--text-2);
+  font-style: italic;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: var(--border-default);
+  margin: var(--sp-8) 0;
+}
+
+/* --- Utility Classes --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-3);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--sp-6);
+  }
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-4);
+}
+
+.section-label::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(to right, var(--accent-muted), transparent);
+}
+
+/* --- Scroll Reveal --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Section Spacing --- */
+section {
+  padding: var(--sp-12) 0;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding: var(--sp-16) 0;
+  }
+}
+
+/* --- Focus States --- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* --- Selection --- */
+::selection {
+  background: var(--accent-muted);
+  color: var(--text-1);
+}

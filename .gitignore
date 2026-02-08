@@ -1,0 +1,10 @@
+# Astro
+dist/
+.astro/
+node_modules/
+
+# Environment
+.env
+
+# OS
+.DS_Store

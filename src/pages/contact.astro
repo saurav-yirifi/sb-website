@@ -1,0 +1,318 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+---
+
+<BaseLayout title="Contact" description="Get in touch with Saurav Bhatia — let's talk about AI, fintech, digital banking, or building ventures.">
+
+  <section class="contact-hero">
+    <div class="container">
+      <span class="contact-eyebrow">Contact</span>
+      <h1 class="contact-headline">Send a Message</h1>
+      <p class="contact-intro">
+        Whether it's about digital banking, crypto regulation, AI, or just connecting —
+        I'd love to hear from you.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact-form-section">
+    <div class="container">
+      <div class="contact-grid">
+        <form class="contact-form" id="contact-form">
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" required autocomplete="name" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label for="message" class="form-label">Message</label>
+            <textarea id="message" name="message" rows="6" required class="form-input form-textarea"></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="submit-btn">
+            <span class="submit-text">Send Message</span>
+            <span class="submit-loading" style="display:none;">Sending...</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+          <div class="form-status" id="form-status"></div>
+        </form>
+
+        <div class="contact-sidebar">
+          <div class="sidebar-card">
+            <div class="sidebar-card-header">
+              <span class="sidebar-indicator"></span>
+              Alternatively
+            </div>
+            <div class="sidebar-links">
+              <a href="https://www.linkedin.com/in/sauravbhats" target="_blank" rel="noopener" class="sidebar-link">
+                <span>LinkedIn</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+              </a>
+              <a href="https://x.com/sauravbhats" target="_blank" rel="noopener" class="sidebar-link">
+                <span>X / Twitter</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+              </a>
+              <a href="https://github.com/saurav-yirifi" target="_blank" rel="noopener" class="sidebar-link">
+                <span>GitHub</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .contact-hero {
+    padding-top: calc(var(--sp-16) + var(--sp-8));
+    padding-bottom: var(--sp-8);
+  }
+
+  .contact-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--sp-3);
+  }
+
+  .contact-headline {
+    font-size: clamp(2rem, 4vw + 0.5rem, 3.5rem);
+    letter-spacing: -0.03em;
+    margin-bottom: var(--sp-3);
+  }
+
+  .contact-intro {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--text-2);
+    max-width: 36rem;
+  }
+
+  .contact-form-section {
+    padding-top: 0;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+    align-items: start;
+  }
+
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr 240px;
+    }
+  }
+
+  /* Form */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  .form-input {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--text-1);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition:
+      border-color var(--duration-fast) var(--ease-out-expo),
+      box-shadow var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .form-input::placeholder {
+    color: var(--text-3);
+  }
+
+  .form-input:focus {
+    border-color: var(--accent-muted);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--bg-void);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    width: fit-content;
+    transition:
+      transform var(--duration-normal) var(--ease-out-expo),
+      box-shadow var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 24px var(--accent-glow);
+  }
+
+  .form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .form-status {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    min-height: 1.5em;
+  }
+
+  .form-status.success {
+    color: var(--accent);
+  }
+
+  .form-status.error {
+    color: var(--accent-3);
+  }
+
+  /* Sidebar */
+  .sidebar-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .sidebar-card-header {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    padding: var(--sp-2) var(--sp-3);
+    border-bottom: 1px solid var(--border-default);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+  }
+
+  .sidebar-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-dim);
+  }
+
+  .sidebar-links {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--text-2);
+    text-decoration: none;
+    padding: var(--sp-2) var(--sp-3);
+    border-bottom: 1px solid var(--border-default);
+    transition: color var(--duration-fast) var(--ease-out-expo),
+                background var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .sidebar-link:last-child {
+    border-bottom: none;
+  }
+
+  .sidebar-link:hover {
+    color: var(--accent);
+    background: var(--bg-elevated);
+    text-decoration: none;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const status = document.getElementById('form-status')!;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const payload = {
+      name: data.get('name'),
+      email: data.get('email'),
+      message: data.get('message'),
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.querySelector('.submit-text')!.style.display = 'none';
+    submitBtn.querySelector('.submit-loading')!.style.display = 'inline';
+    status.textContent = '';
+    status.className = 'form-status';
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        status.textContent = 'Message sent successfully.';
+        status.className = 'form-status success';
+        form.reset();
+      } else {
+        const err = await res.json();
+        status.textContent = err.error || 'Failed to send message.';
+        status.className = 'form-status error';
+      }
+    } catch {
+      status.textContent = 'Network error. Please try again.';
+      status.className = 'form-status error';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.querySelector('.submit-text')!.style.display = 'inline';
+      submitBtn.querySelector('.submit-loading')!.style.display = 'none';
+    }
+  });
+</script>

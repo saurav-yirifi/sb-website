@@ -1,0 +1,445 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+
+const timeline = [
+  {
+    period: 'Now',
+    role: 'Founder & CEO',
+    company: 'Yirifi.ai',
+    description: 'Building the world\'s largest centralized repository of global crypto regulations, case law, and risk scenarios — an AI-powered regulatory intelligence platform. Team of two shipped 15 AI microsites in three months.',
+  },
+  {
+    period: '2021 – 2023',
+    role: 'Interim CEO & Chief Customer & Product Officer',
+    company: 'TRUST Bank',
+    description: 'Singapore\'s first digital bank. Laid the foundation from the ground up: secured regulatory approval, established the joint venture with NTUC, built the team to 100+ employees. Acquired 450,000 clients within four months of launch, capturing 9% market share.',
+  },
+  {
+    period: '2019 – 2021',
+    role: 'Founding CFO',
+    company: 'Mox Bank',
+    description: 'Hong Kong\'s digital bank. Partnered with the CEO to secure the virtual banking license, develop the deployment strategy, and craft the joint venture structure with Standard Chartered. Most downloaded app in Hong Kong, 4.8-star rating, 440,000 clients, $1.2B deposits in two years.',
+  },
+  {
+    period: '2017 – 2023',
+    role: 'Global Head of Digital Assets & Finance',
+    company: 'Standard Chartered',
+    description: 'Led the bank\'s strategy for CBDCs, tokenization, Web3, and cryptocurrency investing across Retail, Private and Wealth. Managed financial strategy, FP&A, and client analytics for a $5B retail operation spanning 9M clients in 32 countries.',
+  },
+  {
+    period: '2008 – 2017',
+    role: 'Progressive Leadership Roles',
+    company: 'Citibank Singapore',
+    description: 'Nine years of progressive leadership across consumer banking, digital transformation, and financial operations.',
+  },
+  {
+    period: '1999',
+    role: 'Founder',
+    company: 'LP Technologies',
+    description: 'First venture — founded a technology company in India.',
+  },
+];
+---
+
+<BaseLayout title="About" description="25+ years building at the intersection of banking, technology, and venture creation. Founder & CEO of Yirifi.ai.">
+
+  <section class="about-hero">
+    <div class="container">
+      <span class="about-eyebrow">About</span>
+      <h1 class="about-headline">Builder, banker, founder.</h1>
+      <p class="about-intro">
+        25+ years at the intersection of banking, technology, and venture building.
+        I've founded digital banks, led global financial strategy, and now I'm building
+        AI-powered tools for the next era of finance.
+      </p>
+    </div>
+  </section>
+
+  <section class="timeline-section">
+    <div class="container">
+      <div class="section-label">Career</div>
+      <div class="timeline">
+        {timeline.map((entry, i) => (
+          <div class="timeline-entry">
+            <div class="timeline-marker">
+              <div class="marker-dot"></div>
+              {i < timeline.length - 1 && <div class="marker-line"></div>}
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <span class="timeline-period">{entry.period}</span>
+                <span class="timeline-company">{entry.company}</span>
+              </div>
+              <h3 class="timeline-role">{entry.role}</h3>
+              <p class="timeline-desc">{entry.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="education-section">
+    <div class="container">
+      <div class="section-label">Education</div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <span class="edu-degree">MBA in Strategy and Finance</span>
+          <span class="edu-school">National University of Singapore</span>
+        </div>
+        <div class="edu-card">
+          <span class="edu-degree">Blockchain Strategy Programme</span>
+          <span class="edu-school">Oxford Sa&iuml;d Business School</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-book">
+    <div class="container">
+      <div class="section-label">The Book</div>
+      <div class="about-book-card">
+        <div class="about-book-content">
+          <h2>Blueprint for an AI&#8209;First Company</h2>
+          <p>A comprehensive playbook for founders and leaders building companies with AI at the core — from strategy and architecture to team design and go-to-market.</p>
+          <div class="about-book-stats">
+            <span>81K+ words</span>
+            <span class="stat-sep">/</span>
+            <span>775 citations</span>
+            <span class="stat-sep">/</span>
+            <span>12 chapters</span>
+          </div>
+          <a href="https://saurav-yirifi.github.io/blueprint-ai-first-company/" target="_blank" rel="noopener" class="link-arrow">
+            Read the Book
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-connect">
+    <div class="container">
+      <div class="connect-inner">
+        <h2>Get in Touch</h2>
+        <p>I'm always happy to connect — whether it's about digital banking, crypto regulation, AI, or building ventures from scratch.</p>
+        <div class="connect-links">
+          <a href="https://www.linkedin.com/in/sauravbhats" target="_blank" rel="noopener" class="connect-link">
+            <span>LinkedIn</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+          <a href="https://x.com/sauravbhats" target="_blank" rel="noopener" class="connect-link">
+            <span>X / Twitter</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+          <a href="/contact/" class="connect-link connect-link-primary">
+            <span>Send a Message</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .about-hero {
+    padding-top: calc(var(--sp-16) + var(--sp-8));
+    padding-bottom: var(--sp-12);
+  }
+
+  .about-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--sp-3);
+  }
+
+  .about-headline {
+    font-size: clamp(2rem, 4vw + 0.5rem, 3.5rem);
+    letter-spacing: -0.03em;
+    margin-bottom: var(--sp-4);
+  }
+
+  .about-intro {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--text-2);
+    max-width: 40rem;
+  }
+
+  /* Timeline */
+  .timeline-section {
+    border-top: 1px solid var(--border-default);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .timeline-entry {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: var(--sp-3);
+  }
+
+  .timeline-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 6px;
+  }
+
+  .marker-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 1.5px solid var(--accent-muted);
+    flex-shrink: 0;
+  }
+
+  .timeline-entry:first-child .marker-dot {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-dim);
+  }
+
+  .marker-line {
+    width: 1px;
+    flex: 1;
+    background: var(--border-default);
+    margin-top: 4px;
+  }
+
+  .timeline-content {
+    padding-bottom: var(--sp-6);
+  }
+
+  .timeline-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2);
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+  }
+
+  .timeline-period {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .timeline-company {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  .timeline-role {
+    font-size: 1.125rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--sp-1);
+    line-height: 1.35;
+  }
+
+  .timeline-desc {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--text-2);
+    max-width: 44rem;
+  }
+
+  /* Education */
+  .education-section {
+    border-top: 1px solid var(--border-default);
+  }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
+  }
+
+  @media (min-width: 640px) {
+    .edu-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .edu-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 4px;
+    padding: var(--sp-4);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .edu-degree {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-1);
+  }
+
+  .edu-school {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    color: var(--text-3);
+  }
+
+  /* Book */
+  .about-book {
+    border-top: 1px solid var(--border-default);
+  }
+
+  .about-book-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-book-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-muted), transparent);
+  }
+
+  .about-book-content {
+    padding: var(--sp-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
+  .about-book-content h2 {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    letter-spacing: -0.02em;
+  }
+
+  .about-book-content p {
+    color: var(--text-2);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+
+  .about-book-stats {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    color: var(--text-3);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+    flex-wrap: wrap;
+  }
+
+  .stat-sep {
+    color: var(--border-hover);
+  }
+
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    transition: gap var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .link-arrow:hover {
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  /* Connect */
+  .about-connect {
+    border-top: 1px solid var(--border-default);
+  }
+
+  .connect-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
+  .connect-inner h2 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    letter-spacing: -0.02em;
+  }
+
+  .connect-inner p {
+    color: var(--text-2);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 36rem;
+  }
+
+  .connect-links {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+    margin-top: var(--sp-1);
+  }
+
+  .connect-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    text-decoration: none;
+    padding: 0.625rem 1.25rem;
+    border: 1px solid var(--border-default);
+    border-radius: 4px;
+    transition:
+      color var(--duration-fast) var(--ease-out-expo),
+      border-color var(--duration-fast) var(--ease-out-expo),
+      background var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .connect-link:hover {
+    color: var(--text-1);
+    border-color: var(--border-hover);
+    background: var(--bg-elevated);
+    text-decoration: none;
+  }
+
+  .connect-link-primary {
+    background: var(--accent);
+    color: var(--bg-void);
+    border-color: var(--accent);
+  }
+
+  .connect-link-primary:hover {
+    color: var(--bg-void);
+    box-shadow: 0 4px 24px var(--accent-glow);
+  }
+</style>

@@ -1,0 +1,262 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const categories = ['All', 'Startups', 'Investing', 'Crypto', 'Weekly Recap'];
+
+function estimateReadTime(body: string): number {
+  const words = body.split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 250));
+}
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+---
+
+<BaseLayout title="Blog" description="Writing about AI, fintech, investing, crypto, and building digital ventures.">
+
+  <section class="blog-hero">
+    <div class="container">
+      <span class="blog-eyebrow">Blog</span>
+      <h1 class="blog-headline">Writing</h1>
+      <p class="blog-intro">Thoughts on AI, fintech, investing, and building digital ventures.</p>
+    </div>
+  </section>
+
+  <section class="blog-list">
+    <div class="container">
+      <div class="category-filters" id="category-filters">
+        {categories.map((cat) => (
+          <button
+            class:list={['filter-btn', { active: cat === 'All' }]}
+            data-category={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <div class="posts-list" id="posts-list">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}/`} class="blog-card" data-category={post.data.category}>
+            <div class="blog-card-inner">
+              <div class="blog-card-meta">
+                <span class="blog-card-category">{post.data.category}</span>
+                <span class="blog-card-date">{formatDate(post.data.date)}</span>
+                <span class="meta-dot"></span>
+                <span class="blog-card-read">{estimateReadTime(post.body ?? '')} min</span>
+              </div>
+              <h2 class="blog-card-title">{post.data.title}</h2>
+              <p class="blog-card-excerpt">{post.data.description}</p>
+            </div>
+            <div class="blog-card-arrow">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .blog-hero {
+    padding-top: calc(var(--sp-16) + var(--sp-8));
+    padding-bottom: var(--sp-8);
+  }
+
+  .blog-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--sp-3);
+  }
+
+  .blog-headline {
+    font-size: clamp(2rem, 4vw + 0.5rem, 3.5rem);
+    letter-spacing: -0.03em;
+    margin-bottom: var(--sp-3);
+  }
+
+  .blog-intro {
+    font-size: 1.0625rem;
+    color: var(--text-2);
+  }
+
+  .blog-list {
+    padding-top: 0;
+  }
+
+  /* Category Filters */
+  .category-filters {
+    display: flex;
+    gap: var(--sp-1);
+    margin-bottom: var(--sp-6);
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    background: none;
+    border: 1px solid var(--border-default);
+    border-radius: 4px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition:
+      color var(--duration-fast) var(--ease-out-expo),
+      border-color var(--duration-fast) var(--ease-out-expo),
+      background var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .filter-btn:hover {
+    color: var(--text-1);
+    border-color: var(--border-hover);
+  }
+
+  .filter-btn.active {
+    color: var(--accent);
+    border-color: var(--accent-muted);
+    background: var(--accent-glow);
+  }
+
+  /* Post Cards */
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+
+  .blog-card {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    text-decoration: none;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 4px;
+    padding: var(--sp-4);
+    transition:
+      border-color var(--duration-normal) var(--ease-out-expo),
+      box-shadow var(--duration-normal) var(--ease-out-expo),
+      transform var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .blog-card:hover {
+    border-color: var(--border-accent);
+    box-shadow: 0 4px 20px var(--accent-glow);
+    transform: translateX(4px);
+    text-decoration: none;
+  }
+
+  .blog-card.hidden {
+    display: none;
+  }
+
+  .blog-card-inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+  }
+
+  .blog-card-meta {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+    flex-wrap: wrap;
+  }
+
+  .blog-card-category {
+    color: var(--accent-2);
+  }
+
+  .meta-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-3);
+  }
+
+  .blog-card-title {
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    transition: color var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .blog-card:hover .blog-card-title {
+    color: var(--accent);
+  }
+
+  .blog-card-excerpt {
+    font-size: 0.875rem;
+    color: var(--text-3);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .blog-card-arrow {
+    color: var(--text-3);
+    flex-shrink: 0;
+    transition: color var(--duration-fast) var(--ease-out-expo),
+                transform var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .blog-card:hover .blog-card-arrow {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 640px) {
+    .blog-card-arrow {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const filters = document.getElementById('category-filters');
+  const cards = document.querySelectorAll('.blog-card');
+
+  filters?.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.filter-btn');
+    if (!btn) return;
+
+    const category = btn.getAttribute('data-category');
+
+    // Update active state
+    filters.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Filter cards
+    cards.forEach(card => {
+      if (category === 'All' || card.getAttribute('data-category') === category) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+</script>
