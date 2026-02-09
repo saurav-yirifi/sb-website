@@ -2,7 +2,10 @@
 title: "The Weekly Recap: Ep1 (30-Jul-21)"
 description: "Life is busy, with lots going on and too much information thrown at us. A weekly note that recaps my curated reading list, market update & bite-sized learning nuggets."
 date: 2021-08-03
-category: "Weekly Recap"
+tags: [recap]
+draft: false
+series: "weekly-recap"
+issue: 1
 ---
 
 ![Weekly Recap Banner](/images/blog/q0-1.png)

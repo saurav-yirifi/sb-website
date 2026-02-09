@@ -2,7 +2,10 @@
 title: "10 Investing Lessons I Learned (Part 2)"
 description: "Once you get hooked to investing, you are always looking for the perfect wave to ride — the right stock, at the right entry price, exiting at the perfect time!"
 date: 2021-08-03
-category: "Investing"
+tags: [investing]
+draft: false
+series: "investing-lessons"
+issue: 2
 ---
 
 **Big Disclaimer**: *This is not investment advice. I am not an investment advisor. This information is meant to be for educational purposes. Please do your own research before you decide to invest your hard-earned money. If you are unsure seek help from a professional financial advisor.*

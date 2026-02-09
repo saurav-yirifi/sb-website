@@ -1,20 +1,12 @@
 ---
 import BaseLayout from '../components/layout/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { getPostUrl, estimateReadTime, formatDate } from '../lib/posts';
 
-const posts = (await getCollection('blog'))
+const posts = (await getCollection('posts'))
   .filter(p => !p.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
-
-function estimateReadTime(body: string): number {
-  const words = body.split(/\s+/).length;
-  return Math.max(1, Math.ceil(words / 250));
-}
-
-function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-}
 ---
 
 <BaseLayout title="Home">
@@ -160,9 +152,9 @@ function formatDate(date: Date): string {
       <div class="section-label">03 // Latest Writing</div>
       <div class="posts-grid">
         {posts.map((post) => (
-          <a href={`/blog/${post.id}/`} class="post-card">
+          <a href={getPostUrl(post)} class="post-card">
             <div class="post-card-inner">
-              <span class="post-category">{post.data.category}</span>
+              <span class="post-category">{post.data.tags[0]}</span>
               <h3 class="post-title">{post.data.title}</h3>
               <p class="post-excerpt">{post.data.description}</p>
               <div class="post-meta">

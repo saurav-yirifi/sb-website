@@ -3,40 +3,46 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
 const timeline = [
   {
-    period: 'Now',
+    period: '2023 – Present',
     role: 'Founder & CEO',
     company: 'Yirifi.ai',
-    description: 'A 20-person AI-powered regulatory intelligence startup enabling financial institutions to safely launch and scale blockchain initiatives. Building the world\'s largest centralized repository of global crypto regulations, case law, and risk scenarios. Just two people built 15 backoffice microsites in three months.',
-  },
-  {
-    period: '2021 – 2023',
-    role: 'Interim CEO & Chief Customer & Product Officer',
-    company: 'TRUST Bank',
-    description: 'Singapore\'s first digital bank. Laid the foundation from the ground up: securing regulatory approval, establishing the joint venture with NTUC, building the team to 100+ employees, and defining the product vision. Grown to over 1 million clients, capturing approximately 20% market share.',
+    description: 'Building a digital-asset risk and regulatory compliance platform enabling financial institutions to safely launch and scale blockchain initiatives. Creating the world\'s largest centralized repository of global crypto regulations, case law, and risk scenarios. Scaled to a 20-person international team with an AI-powered regulatory intelligence platform providing compliance teams real-time access to supervisory guidance and automated audit evidence generation.',
   },
   {
     period: '2019 – 2021',
+    role: 'Interim CEO & Chief Customer & Product Officer',
+    company: 'TRUST Bank',
+    description: 'Singapore\'s first digital bank. Laid the foundation from the ground up: securing regulatory approval, establishing the joint venture with NTUC, managing a $100M budget, and building the team to 100+ employees. Designed a seamless multi-channel client experience with a 4.7-star app rating and 70% client acquisition through referrals. Introduced first-in-market ESG card using ocean plastic. Grown to over 1 million clients, capturing approximately 20% market share.',
+  },
+  {
+    period: '2018',
     role: 'Founding CFO',
     company: 'Mox Bank',
-    description: 'Hong Kong\'s digital bank. Partnered with the CEO to secure the virtual banking license, develop the deployment strategy, and craft the joint venture structure with Standard Chartered. Most downloaded app in Hong Kong across all categories, 4.8-star rating, 750,000 clients capturing 12% market share. Recommended the early adoption of Thought Machine\'s blockchain-based core banking system.',
+    description: 'Standard Chartered\'s digital bank in Hong Kong. Partnered with the CEO to secure the virtual banking license, develop the deployment strategy, and craft the joint venture structure. Most downloaded app in Hong Kong across all categories, 4.8-star rating, 750,000 clients capturing 12% market share. Recommended early adoption of Thought Machine\'s cloud-native core banking system, targeting 30% lower cost and 60% faster deployment.',
   },
   {
-    period: '2017 – 2023',
+    period: '2014 – 2023',
     role: 'Global Head of Digital Assets & Finance',
     company: 'Standard Chartered',
-    description: 'Led the bank\'s strategy for CBDCs, tokenization, Web3, and cryptocurrency investing across Retail, Private and Wealth. Managed financial strategy, FP&A, and client analytics for a $5B retail operation spanning 9M clients in 32 countries.',
+    description: 'Led the bank\'s strategy for CBDCs, tokenization, Web3, and cryptocurrency investing across Retail, Private and Wealth. Delivered trusted cryptocurrency investing for high-net-worth individuals and launched CBDC wallet integrations (eNaira and eRMB). Managed financial strategy, FP&A, and client analytics for a $5B retail operation spanning 9M clients in 32 countries. Maximized divestiture value of a $2.2B private equity business and drove a $200M cost transformation.',
   },
   {
-    period: '2008 – 2017',
+    period: '2005 – 2014',
     role: 'Progressive Leadership Roles',
     company: 'Citibank Singapore',
     description: 'Nine years of progressive leadership including Global Finance Head for Private Bank Operations & Technology and Asia Chief Operating Officer for Technology.',
   },
   {
-    period: '1999',
+    period: '2000 – 2003',
+    role: 'Web Strategist',
+    company: 'IT&T Limited',
+    description: 'Web strategy at IT&T Limited, later acquired by Capgemini.',
+  },
+  {
+    period: '1999 – 2000',
     role: 'Founder',
     company: 'LP Technologies',
-    description: 'First venture — founded a technology company in India. Also served as a web strategist at IT&T Limited (later acquired by Capgemini).',
+    description: 'First venture — founded a technology company in India.',
   },
 ];
 ---
@@ -91,6 +97,10 @@ const timeline = [
         <div class="edu-card">
           <span class="edu-degree">Blockchain Strategy Programme</span>
           <span class="edu-school">Oxford Sa&iuml;d Business School</span>
+        </div>
+        <div class="edu-card">
+          <span class="edu-degree">Bachelor of Arts (Hons) in Economics</span>
+          <span class="edu-school">University of Delhi</span>
         </div>
       </div>
     </div>
@@ -274,7 +284,7 @@ const timeline = [
 
   @media (min-width: 640px) {
     .edu-grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 

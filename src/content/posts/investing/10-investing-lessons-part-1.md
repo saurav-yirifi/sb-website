@@ -2,7 +2,10 @@
 title: "10 Investing Lessons I Learned (Part 1)"
 description: "Investing isn't as easy as it seems. I guess it's a bit like surfing — it seemed simple when I saw it but was totally different ball game when I actually tried it the first time."
 date: 2021-08-02
-category: "Investing"
+tags: [investing]
+draft: false
+series: "investing-lessons"
+issue: 1
 ---
 
 **Big Disclaimer**: *This is not investment advice. I am not an investment advisor. This information is meant to be for educational purposes. Please do your own research before you decide to invest your hard-earned money. If you are unsure seek help from a professional financial advisor who can understand the full breadth of your financial needs & commitments to advise you on what you should do.*

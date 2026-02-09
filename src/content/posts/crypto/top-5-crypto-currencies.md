@@ -2,7 +2,8 @@
 title: "Top 5 Crypto Currencies and Their Smashing Returns"
 description: "What?? there is more to Crypto than just Bitcoin & Doge!! Are you really serious!"
 date: 2021-08-03
-category: "Crypto"
+tags: [crypto]
+draft: false
 ---
 
 **Big Disclaimer**: *This is not investment advice. I am not an investment advisor. This information is meant to be for educational purposes. Please do your own research before you decide to invest your hard-earned money. If you are unsure seek help from a professional financial advisor who can understand the full breadth of your financial needs & commitments to advise you on what you should do.*

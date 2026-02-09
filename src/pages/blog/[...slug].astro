@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../../components/layout/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
+import { getSlug, getPostUrl, estimateReadTime, formatDateLong, formatDate } from '../../lib/posts';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection('posts');
   return posts.map(post => ({
-    params: { slug: post.id },
+    params: { slug: getSlug(post) },
     props: { post },
   }));
 }
@@ -13,25 +14,37 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
-const allPosts = (await getCollection('blog'))
-  .filter(p => !p.data.draft)
-  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+const allPosts = (await getCollection('posts'))
+  .filter(p => !p.data.draft);
 
-const currentIndex = allPosts.findIndex(p => p.id === post.id);
-const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
-const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+// Determine navigation: series-based or chronological
+const hasSeries = post.data.series && post.data.issue != null;
 
-function estimateReadTime(body: string): number {
-  const words = body.split(/\s+/).length;
-  return Math.max(1, Math.ceil(words / 250));
+let prevPost = null;
+let nextPost = null;
+
+if (hasSeries) {
+  // Series navigation: ordered by issue
+  const seriesPosts = allPosts
+    .filter(p => p.data.series === post.data.series)
+    .sort((a, b) => (a.data.issue ?? 0) - (b.data.issue ?? 0));
+  const idx = seriesPosts.findIndex(p => p.id === post.id);
+  prevPost = idx > 0 ? seriesPosts[idx - 1] : null;
+  nextPost = idx < seriesPosts.length - 1 ? seriesPosts[idx + 1] : null;
+} else {
+  // Chronological navigation
+  const chronoPosts = allPosts
+    .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+  const idx = chronoPosts.findIndex(p => p.id === post.id);
+  prevPost = idx > 0 ? chronoPosts[idx - 1] : null;
+  nextPost = idx < chronoPosts.length - 1 ? chronoPosts[idx + 1] : null;
 }
 
-function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-}
+// Series name for display (capitalize and format)
+const seriesLabel = post.data.series?.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout title={post.data.title} description={post.data.description} ogImage={post.data.cover}>
 
   <article class="post">
     <div class="container">
@@ -40,12 +53,32 @@ function formatDate(date: Date): string {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
           All posts
         </a>
+
+        {post.data.cover && (
+          <img src={post.data.cover} alt="" class="post-cover" />
+        )}
+
         <div class="post-meta">
-          <span class="post-category">{post.data.category}</span>
-          <span class="post-date">{formatDate(post.data.date)}</span>
+          {hasSeries ? (
+            <a href={`/series/${post.data.series}/`} class="post-series-badge">
+              {seriesLabel} &middot; Issue #{post.data.issue}
+            </a>
+          ) : (
+            <span class="post-tags">
+              {post.data.tags.map((tag, i) => (
+                <><a href={`/blog/tag/${tag}/`} class="post-tag">{tag}</a>{i < post.data.tags.length - 1 && <span class="tag-sep">/</span>}</>
+              ))}
+            </span>
+          )}
+          <span class="post-date">{formatDateLong(post.data.date)}</span>
           <span class="meta-sep">&middot;</span>
           <span class="post-read">{estimateReadTime(post.body ?? '')} min read</span>
         </div>
+
+        {post.data.updated && (
+          <div class="post-updated">Updated {formatDate(post.data.updated)}</div>
+        )}
+
         <h1 class="post-title">{post.data.title}</h1>
       </div>
 
@@ -53,17 +86,25 @@ function formatDate(date: Date): string {
         <Content />
       </div>
 
+      {post.data.substack_id && (
+        <div class="substack-link">
+          <a href={`https://blog.sauravbhatia.com/p/${getSlug(post)}`} target="_blank" rel="noopener noreferrer">
+            Also on Substack &rarr;
+          </a>
+        </div>
+      )}
+
       {(prevPost || nextPost) && (
         <nav class="post-nav">
           {prevPost ? (
-            <a href={`/blog/${prevPost.id}/`} class="post-nav-link prev">
-              <span class="post-nav-label">Previous</span>
+            <a href={getPostUrl(prevPost)} class="post-nav-link prev">
+              <span class="post-nav-label">{hasSeries ? `Issue #${prevPost.data.issue}` : 'Previous'}</span>
               <span class="post-nav-title">{prevPost.data.title}</span>
             </a>
           ) : <div />}
           {nextPost ? (
-            <a href={`/blog/${nextPost.id}/`} class="post-nav-link next">
-              <span class="post-nav-label">Next</span>
+            <a href={getPostUrl(nextPost)} class="post-nav-link next">
+              <span class="post-nav-label">{hasSeries ? `Issue #${nextPost.data.issue}` : 'Next'}</span>
               <span class="post-nav-title">{nextPost.data.title}</span>
             </a>
           ) : <div />}
@@ -103,6 +144,14 @@ function formatDate(date: Date): string {
     text-decoration: none;
   }
 
+  .post-cover {
+    width: 100%;
+    max-width: var(--content-width);
+    border-radius: 4px;
+    border: 1px solid var(--border-default);
+    margin-bottom: var(--sp-6);
+  }
+
   .post-meta {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
@@ -116,12 +165,44 @@ function formatDate(date: Date): string {
     flex-wrap: wrap;
   }
 
-  .post-category {
+  .post-series-badge {
     color: var(--accent-2);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .post-series-badge:hover {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .post-tags .post-tag {
+    color: var(--accent-2);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .post-tags .post-tag:hover {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .post-tags .tag-sep {
+    color: var(--text-3);
+    margin: 0 2px;
   }
 
   .meta-sep {
     color: var(--text-3);
+  }
+
+  .post-updated {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-dim);
+    margin-bottom: var(--sp-2);
   }
 
   .post-title {
@@ -187,6 +268,30 @@ function formatDate(date: Date): string {
 
   .post-content :global(strong) {
     color: var(--text-1);
+  }
+
+  /* Substack link */
+  .substack-link {
+    max-width: var(--content-width);
+    margin-top: var(--sp-6);
+    padding: var(--sp-3);
+    border: 1px solid var(--accent-muted);
+    border-radius: 4px;
+    background: var(--accent-glow);
+  }
+
+  .substack-link a {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out-expo);
+  }
+
+  .substack-link a:hover {
+    color: var(--text-1);
+    text-decoration: none;
   }
 
   /* Post navigation */

@@ -2,7 +2,8 @@
 title: "12 Things I Learned from Building Digital Ventures"
 description: "Sharing some of the things I learned from building out new ventures as part of the co-founding leadership team."
 date: 2021-06-16
-category: "Startups"
+tags: [startups]
+draft: false
 ---
 
 I have been fortunate to have been in the leadership team founding 2 Digital Bank Ventures. These are the 12 things I learned from this experience:
