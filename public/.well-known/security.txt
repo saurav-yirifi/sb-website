@@ -1,0 +1,6 @@
+Contact: mailto:security@yirifi.ai
+Expires: 2027-10-01T00:00:00.000Z
+Policy: https://yirifi.ai/security/
+Preferred-Languages: en
+Canonical: https://saurav.ai/.well-known/security.txt
+Canonical: https://sauravbhatia.com/.well-known/security.txt
